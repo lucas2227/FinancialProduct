@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wolfcode.p2p.business.mapper.PlatformBankinfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.wolfcode.p2p.business.domain.PlatformBankinfo" >
+    <id column="id" property="id" />
+    <result column="bankName" property="bankName" />
+    <result column="accountName" property="accountName" />
+    <result column="accountNumber" property="accountNumber" />
+    <result column="bankForkname" property="bankForkname" />
+  </resultMap>
+  <insert id="insert" parameterType="cn.wolfcode.p2p.business.domain.PlatformBankinfo" useGeneratedKeys="true" keyProperty="id" >
+    insert into `platformbankinfo` (bankName, accountName, accountNumber, bankForkname)
+    values (#{bankName}, #{accountName}, #{accountNumber}, #{bankForkname})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.wolfcode.p2p.business.domain.PlatformBankinfo" >
+    update `platformbankinfo`
+    set bankName = #{bankName},
+      accountName = #{accountName},
+      accountNumber = #{accountNumber},
+      bankForkname = #{bankForkname}
+    where id = #{id}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select id, bankName, accountName, accountNumber, bankForkname
+    from `platformbankinfo`
+    where id = #{id}
+  </select>
+  <sql id="base_where">
+    <where></where>
+  </sql>
+  <select id="queryPage" resultMap="BaseResultMap">
+    select id, bankName, accountName, accountNumber, bankForkname
+    from `platformbankinfo`
+    <include refid="base_where"/>
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+     select id, bankName, accountName, accountNumber, bankForkname
+    from `platformbankinfo`
+  </select>
+</mapper>
